@@ -1,0 +1,1 @@
+cc filename.txt -lGL -lGLU -lglut

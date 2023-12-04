@@ -1,0 +1,15 @@
+import numpy as np
+def activation(x):
+ return 1 / (1 + np.exp(-x))
+weights = np.random.uniform(-1,1,size = (2, 1))
+t_inputs = np.array([[0, 0, 1, 1, 0, 1]]).reshape(3, 2)
+t_outputs = np.array([[0, 1, 1]]).reshape(3,1)
+for i in range(15000):
+ dot_product = np.dot(t_inputs, weights)
+ output = activation(dot_product)
+ temp2 = -(t_outputs - output) * output * (1 - output)
+ adj = np.dot(t_inputs.transpose(), temp2)
+ weights = weights - 0.5 * adj
+test_input = np.array([1, 0])
+test_output = activation(np.dot(test_input, weights))
+print("output",test_output)

@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<math.h>
+#include<GL/glut.h>
+int xstart,xend,ystart,yend;
+int Round(float a)
+{
+return (int) (a+0.5);
+}
+void lineDDA(void)
+{
+int dx=xend-xstart;
+int dy=yend-ystart;
+int steps,k;
+float xincrement,yincrement,x=xstart,y=ystart;
+if(abs(dx)>abs(dy))
+{
+steps=abs(dx);
+}
+else
+steps=fabs(dy);
+xincrement=(float) (dx)/(float) (steps);
+yincrement=(float) (dy)/(float)(steps);
+glBegin(GL_POINTS);
+glVertex2i(Round(x),Round(y));
+glEnd();
+for(k=0;k<steps;k++)
+ {
+x+=xincrement;
+y+=yincrement;
+glBegin(GL_POINTS);
+glVertex2i(Round(x),Round(y));
+glEnd();
+}
+glFlush();
+}
+int main(int argc,char** argv)
+{
+printf("enter the value for the coordinate");
+scanf("%d%d%d%d",&xstart,&xend,&ystart,&yend);
+glutInit(&argc,argv);
+glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+glutInitWindowPosition(50,100);
+glutInitWindowSize(500,500);
+glutCreateWindow("An example program");
+glClearColor(1.0,1.0,1.0,0.0);
+glMatrixMode(GL_PROJECTION);
+gluOrtho2D(0.0,200.0,0.0,150.0);
+glClear(GL_COLOR_BUFFER_BIT);
+glColor3f(1.0,0.0,0.0);
+glPointSize(5.0);
+glutDisplayFunc(lineDDA);
+glutMainLoop();
+}

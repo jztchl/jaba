@@ -1,0 +1,12 @@
+import numpy as np 
+inputs = [0.8,0.6,0.4]
+weights = [0.1, 0.3, -0.2]
+bias = 0.35
+x= np.dot(weights, inputs) + bias 
+print('Output',x)
+def sig(x):
+    return 1/(1 + np.exp(-x))
+print('Applying binary sigmoidal function',sig(x))
+def bipolar(x):
+    return (2/(1 + np.exp(-x)))-1
+print('Applying bipolar sigmoidal function',bipolar(x))

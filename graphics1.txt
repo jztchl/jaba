@@ -1,0 +1,66 @@
+#include<GL/glut.h>
+void init(void)
+{
+glClearColor(1.0,1.0,1.0,0.0);
+glMatrixMode(GL_PROJECTION);
+gluOrtho2D(0.0,200.0,0.0,150.0);
+}
+void PlotPoint(void)
+{
+ glColor3f(1.0,0.0,0.0);
+glPointSize(8.0);
+glBegin(GL_POINTS);
+glVertex2i(130,100);
+glEnd();
+glPointSize(8.0);
+glColor3f(0.0,1.0,0.0);
+glBegin(GL_POINTS);
+glVertex2i(140,100);
+glColor3f(0.0,0.0,1.0);
+glVertex2i(150,100);
+glEnd(); glFlush();
+}
+void linesegment(void)
+{
+glColor3f(0.0,0.4,0.2);
+glLineWidth(2.0);
+glEnable(GL_LINE_STIPPLE);
+glLineStipple(1,0x0101);
+glBegin(GL_LINES);
+glVertex2i(180,50);
+glVertex2i(25,145);
+glEnd();
+glLineWidth(5.0);
+glColor3f(0.5,0.4,0.2);
+glLineStipple(1,0x00FF);
+glBegin(GL_LINES);
+glVertex2i(180,25);
+glVertex2i(50,145);
+glEnd();
+glLineWidth(3.0);
+glColor3f(0.4,0.3,0.2);
+glLineStipple(1,0x1C47);
+glBegin(GL_LINES);
+glVertex2i(170,12);
+glVertex2i(5,150);
+glEnd();
+glDisable(GL_LINE_STIPPLE);
+glFlush();
+}
+void display(void)
+{
+linesegment();
+PlotPoint();
+}
+int main(int argc,char** argv)
+{
+glutInit(&argc,argv);
+glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+glutInitWindowPosition(50,100);
+glutInitWindowSize(400,300);
+glutCreateWindow("an example opengl pgm");
+init();
+glClear(GL_COLOR_BUFFER_BIT);
+glutDisplayFunc(display);
+glutMainLoop();
+ }

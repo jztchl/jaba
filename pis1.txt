@@ -1,0 +1,98 @@
+def union(A,B):
+ result={}
+ for i in A:
+     if(A[i]>B[i]):
+        result[i]=A[i]
+     else:
+        result[i]=B[i]
+ print("Union of two sets is",result)
+def intersection(A,B):
+ result={}
+ for i in A:
+    if(A[i]<B[i]):
+        result[i]=A[i]
+    else:
+        result[i]=B[i]
+ print("Intersection of two sets is",result)
+def complement(A,B):
+ result={}
+ result1={}
+ for i in A:
+    result[i]=round(1-A[i],2)
+ for i in B:
+    result1[i]=round(1-B[i],2)
+ print("Complement of 1st set is",result)
+ print("Complement of 2nd set is",result1)
+def algsum(A,B):
+ result={}
+ for i in A:
+    result[i]=round(A[i]+B[i]-(A[i]*B[i]),2)
+ print("algebric sum of 2 set is",result)
+def algpro(A,B):
+ result={}
+ for i in A:
+    result[i]=round(A[i]*B[i],2)
+ print("algebric product is",result)
+def boundsum(A,B):
+ result={}
+ for i in A:
+    result[i]=min(1,round((A[i]+B[i]),2))
+ print("Bounded sum is",result) 
+def bounddiff(A,B):
+ result={}
+ for i in A:
+    result[i]=max(0,round((A[i]-B[i]),2))
+ print("Bounded sum is",result) 
+def cartesian(A,B):
+ import numpy as np
+ res=[]
+ for x in A:
+    for y in B:
+        res.append(max(A[x],B[y]))
+ nr=np.array(res).reshape(len(A),len(B))
+ print("Bounded sum is",nr)
+print("Menu Driven Program")
+print("1.Union")
+print("2.Intersection") 
+print("3.complement") 
+print("4.algebric sum") 
+print("5.algebric pro") 
+print("6.bounded sum") 
+print("7.bounded difference") 
+print("8.cartesian product") 
+print("9.Exit")
+while True:
+ choice=input("Enter your choice:")
+ if choice in ('1','2','3','4','5','6', '7','8','9'):
+    n = int(input("enter no.of elements of set 1:"))
+    d = {}
+    for i in range(n):
+        keys = input()
+        values = float(input())
+        d[keys] = values
+    n1 = int(input("enter no.of elements of set 2:"))
+    d1 = {}
+    for i in range(n1):
+        keys1 = input()
+        values1 = float(input())
+        d1[keys1] = values1
+    if choice=='1':
+        union(d,d1)
+    elif choice=='2':
+        intersection(d,d1)
+    elif choice=='3':
+        complement(d,d1)
+    elif choice=='4':
+        algsum(d,d1) 
+    elif choice=='5':
+        algpro(d,d1) 
+    elif choice=='6':
+        boundsum(d,d1)
+    elif choice=='7':
+        bounddiff(d,d1)
+    elif choice=='8':
+        cartesian(d,d1)
+    elif choice=='9':
+        break
+    else:
+        print("invalid input")

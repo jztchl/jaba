@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Programs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      color: red;
+    }
+
+    .copy-icon {
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="copyPrograms">
+    <p class="copy-icon" onclick="copyToClipboard('pis1.txt')">1. 📋 PIS Program 1</p>
+    <p class="copy-icon" onclick="copyToClipboard('pis2.txt')">2. 📋 PIS Program 2</p>
+    <p class="copy-icon" onclick="copyToClipboard('pis3a.txt')">3. 📋 PIS Program 3A</p>
+    <p class="copy-icon" onclick="copyToClipboard('pis3b.txt')">4. 📋 PIS Program 3B</p>
+    <p class="copy-icon" onclick="copyToClipboard('graphics1.txt')">5. 📋 CG Program 1</p>
+    <p class="copy-icon" onclick="copyToClipboard('graphics2.txt')">6. 📋 CG Program 2</p>
+    <p class="copy-icon" onclick="copyToClipboard('graphics3.txt')">7. 📋 CG Program 3</p>
+    <p class="copy-icon" onclick="copyToClipboard('run.txt')">run cg</p>
+  </div>
+<script>window.resizeTo(400, 150);</script>
+  <script>
+    function copyToClipboard(filePath) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", filePath, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          const text = xhr.responseText;
+
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+
+          alert(`Copied from file: ${filePath}`);
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</body>
+
+</html>
