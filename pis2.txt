@@ -1,15 +1,37 @@
 import numpy as np
-def activation(x):
- return 1 / (1 + np.exp(-x))
-weights = np.random.uniform(-1,1,size = (2, 1))
-t_inputs = np.array([[0, 0, 1, 1, 0, 1]]).reshape(3, 2)
-t_outputs = np.array([[0, 1, 1]]).reshape(3,1)
-for i in range(15000):
- dot_product = np.dot(t_inputs, weights)
- output = activation(dot_product)
- temp2 = -(t_outputs - output) * output * (1 - output)
- adj = np.dot(t_inputs.transpose(), temp2)
- weights = weights - 0.5 * adj
-test_input = np.array([1, 0])
-test_output = activation(np.dot(test_input, weights))
-print("output",test_output)
+A=np.array([[0.2,0.5],[0.7,0.3]])
+B=np.array([[0.6,0.4],[0.8,0.2]])
+def max_min_composition(A,B):
+    result=np.zeros_like(A)
+    for i in range(len(A)):
+        for j in range(len(B[0])):
+            max_min=0
+            for k in range(len(A[0])):
+                max_min=max(max_min,min(A[i][k],B[k][j]))
+            result[i][j]=max_min
+    return result
+def max_product_composition(A,B):
+    result=np.zeros_like(A)
+    for i in range(len(A)):
+        for j in range(len(B[0])):
+            max_product=0
+            for k in range(len(A[0])):
+                max_product=max(max_product,A[i][k]*B[k][j])
+            result[i][j]=max_product
+    return result
+while True:
+    print("fuzzy relation operation:")
+    print("1.max-min composition:")
+    print("2.max-product composition:")
+    print("3.exit")
+    choice=input("enter your choice")
+    if choice=='1':
+         result=max_min_composition(A,B)
+         print("result of max-min composition:",result)
+    elif choice=='2':
+         result=max_product_composition(A,B)
+         print("result of max_product_composition:",result)
+    elif choice=='3':
+         break
+    else:
+         print("invalid")
